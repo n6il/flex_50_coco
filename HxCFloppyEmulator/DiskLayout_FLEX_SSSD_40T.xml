@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- HxC Floppy Emulator Disk Layout -->
+<disk_layout>
+  <disk_layout_name>FLEX_SSDD_39T_89KB_special</disk_layout_name>
+  <disk_layout_description>FLEX_SSDD_39T_89KB_special</disk_layout_description>
+  <prefered_file_extension>dsk</prefered_file_extension>
+  <interface_mode>GENERIC_SHUGART_DD_FLOPPYMODE</interface_mode>
+  <file_size>102400</file_size>
+  <layout>
+    <number_of_track>40</number_of_track>
+    <number_of_side>1</number_of_side>
+    <format>IBM_FM</format>
+    <start_sector_id>1</start_sector_id>
+    <sector_per_track>10</sector_per_track>
+    <sector_size>256</sector_size>
+    <formatvalue>0</formatvalue>
+    <gap3>255</gap3>
+    <bitrate>250000</bitrate>
+    <!--FM tracks : <interleave>4</interleave>-->
+    <interleave>4</interleave>
+    <!--MFM tracks : <interleave>6</interleave>-->
+    <pregap>0</pregap>
+    <rpm>300</rpm>
+  </layout>
+</disk_layout>
