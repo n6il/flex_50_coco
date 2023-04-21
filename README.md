@@ -31,7 +31,7 @@ The following ready-to-use binaries are available:
 
 Both tools must be in the current PATH
 
-* `hxcfe` -- HxCFloppyEmulator command line tool
+* `hxcfe` -- HxCFloppyEmulator command line tool - NOTE: Must be Version 2.14.6.3 or later
 * `dmk2sdf` -- DMK to SDF conversion utility
 
 ## Building
@@ -80,6 +80,5 @@ The disk images are of various formats.  The Operating System disks are what is 
 Unfortunately it's impossible to fit 18-sectors in a Single-density track.  This project utilizes a few hacks to remove the 8 extra sectors from track 0 and to restore the single density formatting:
 
 1. Custom XML layout files for the HxCFloppyEmulator tools were generated which skip over the padding sectors and restore single-density formatting on track 0
-2. Due to a bug or limitation in the `hxcfe` tools, an additional sector is appended to the disk images
-3. `hxcfe` tool converts the original sector images to DMK format images.  The DMK iamges can be used to create physical floppies or can also be used in David Keil's Coco emulator.
-4. `dmk2sdf` tool is used to convert the DMK images to SDF format used on the CoCo SDC.
+2. `hxcfe` tool converts the original sector images to DMK format images.  The DMK iamges can be used to create physical floppies or can also be used in David Keil's Coco emulator.
+3. `dmk2sdf` tool is used to convert the DMK images to SDF format used on the CoCo SDC.
