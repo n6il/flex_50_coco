@@ -24,7 +24,7 @@ Each of these directores has the following:
 
 The following ready-to-use binaries are available:
 
-* `dmk` -- DMK images of the disks.  These can be used for writing to physical disks or in emulators such as David Keil's CoCo 2 emulator.
+* `dmk` -- DMK images of the disks.  These can be used for writing to physical disks or in emulators such as XRoar or David Keil's CoCo 2 emulator.
 * `sdf` -- SDF images for CoCo SDC
 
 ## Building Requirements
@@ -80,5 +80,5 @@ The disk images are of various formats.  The Operating System disks are what is 
 Unfortunately it's impossible to fit 18-sectors in a Single-density track.  This project utilizes a few hacks to remove the 8 extra sectors from track 0 and to restore the single density formatting:
 
 1. Custom XML layout files for the HxCFloppyEmulator tools were generated which skip over the padding sectors and restore single-density formatting on track 0
-2. `hxcfe` tool converts the original sector images to DMK format images.  The DMK iamges can be used to create physical floppies or can also be used in David Keil's Coco emulator.
+2. `hxcfe` tool converts the original sector images to DMK format images.  The DMK iamges can be used to create physical floppies or can also be used in XRoar or David Keil's Coco emulator.
 3. `dmk2sdf` tool is used to convert the DMK images to SDF format used on the CoCo SDC.
