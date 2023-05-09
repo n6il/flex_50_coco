@@ -12,7 +12,7 @@ MOVE: $(DMKS)
 DMK: $(DMKS)
 
 %.DMK: %.DSK
-	hxcfe -uselayout:../../HxCFloppyEmulator/DiskLayout_FLEX_SSDD_35T_padding_removed.xml -finput:$< -conv:TRS80_DMK -foutput:$@
+	../../tools/dmk.py --flex --padding 18 --template ../../templates/BLANK_FLEX_SSDD35T.DMK --import $< --output $@
 	
 clean:
 	rm -vf *.DMK
