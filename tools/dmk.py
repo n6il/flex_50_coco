@@ -8,6 +8,27 @@ import argparse
 import shutil
 import os
 
+def flexSir(data):
+    link, zeros, volnam, volnum, first_t, first_s, last_t, last_s, numsec, mon, day, year, max_t, max_s, _ = \
+            unpack(">H14s11sHBBBBHBBBBB8s", data[:48])
+
+    return {
+        'link': link,
+        'zeros': zeros,
+        'volnam': volnam,
+        'volnum': volnum,
+        'first_t': first_t,
+        'first_s': first_s,
+        'last_t': last_t,
+        'last_s': last_s,
+        'numsec': numsec,
+        'mon': mon,
+        'day': day,
+        'year': year,
+        'max_t': max_t,
+        'max_s': max_s,
+    }
+
 def strDdup(s):
         r = []
         for i in range(len(s)):
@@ -193,6 +214,8 @@ if __name__ == '__main__':
     parser.add_argument('-t', '--template')
     parser.add_argument('-o', '--output')
     parser.add_argument('-p', '--padding', type=int, default=0)
+    parser.add_argument('-s', '--sectors', type=int, default=0)
+    parser.add_argument('-k', '--tracks', type=int, default=0)
     parser.add_argument('--flex', action='store_true')
     args = parser.parse_args()
 
@@ -205,7 +228,11 @@ if __name__ == '__main__':
         pprint.pprint(dmk.dmk)
         for track in sorted(dmk.tracks()):
             for side in sorted(dmk.sides(track)):
-                sectors = sorted(dmk.sectors(track, side))
+                if track == 0 or args.sectors == 0:
+                    sectors = sorted(dmk.sectors(track, side))
+                else:
+                    start = side * args.sectors + 1
+                    sectors = range(start,start+args.sectors)
                 for sector in sectors:
                     data = dmk.readSector(track, side, sector)
                     dmk.writeSector(track, side, sector, data)
@@ -220,7 +247,12 @@ if __name__ == '__main__':
         for track in sorted(dmk.tracks()):
             remain = 0
             for side in sorted(dmk.sides(track)):
-                sectors = sorted(dmk.sectors(track, side))
+                if track == 0 or args.sectors == 0:
+                    sectors = sorted(dmk.sectors(track, side))
+                else:
+                    start = side * args.sectors + 1
+                    sectors = range(start,start+args.sectors)
+                # sectors = sorted(dmk.sectors(track, side))
                 if not args.flex:
                     remain = 0
                 for sector in sectors:
@@ -246,13 +278,22 @@ if __name__ == '__main__':
         ef = os.path.expanduser(args.export)
         of = os.path.expanduser(args.output)
         dmk = DMK(ef)
+        if args.flex:
+            flex=flexSir(dmk.readSector(0,0,3))
         f = open(of, 'wb')
         for track in sorted(dmk.tracks()):
             remain = 0
             for side in sorted(dmk.sides(track)):
-                sectors = sorted(dmk.sectors(track, side))
+                if track == 0 or args.sectors == 0:
+                    sectors = sorted(dmk.sectors(track, side))
+                else:
+                    start = side * args.sectors + 1
+                    sectors = range(start,start+args.sectors)
                 if not args.flex:
                     remain = 0
+                if (args.flex and track > flex['max_t']) or (args.tracks > 0 and track > args.tracks):
+                    print("WARNING: Skipping Track:%d Max Track:%d" % (track, flex['max_t']))
+                    continue
                 for sector in sectors:
                     f.write(dmk.readSector(track, side, sector))
                 remain += args.padding - len(sectors)

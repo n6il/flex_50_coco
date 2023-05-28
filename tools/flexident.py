@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import sys
 import os
 from struct import *
@@ -52,14 +50,14 @@ while t==0:
 if max_s in [10,20]:
     print("Single-Density")
     density="SD"
-elif max_s in [18,36]:
+elif max_s in [17,18,36]:
     print("Double-Density")
     density="DD"
 else:
     print("Density: Unknown")
     density="UD"
 
-if max_s in [10,18]:
+if max_s in [10,17,18]:
     print("Single-Sided")
     sides="SS"
 elif max_s in [20,36]:
