@@ -5,33 +5,44 @@
 This package has the following directories:
 
     OS
+    OS/ima
     OS/sdf
     OS/dmk
     OS/orig-padded
+    OS/orig-scp
     APPS
+    APPS/ima
     APPS/sdf
     APPS/dmk
     APPS/orig-padded
+    APPS/orig-scp
     APPS/orig
+    SRC
+    SRC/sdf
+    SRC/dmk
+    SRC/orig-padded
 
 * `OS` -- Contains the FLEX OS Disks
 * `APPS` -- Contains Applications
+* `SRC` -- Contains FLEX Source Code
 
 Each of these directores has the following:
 
 * `orig` -- Original DSK iamges
 * `orig-padded` -- Original "Padded" DSK Images (additional padding sectors in track 0)
+* `orig-scp` -- Original SCP Images (images of physical floppies)
 
 The following ready-to-use binaries are available:
 
 * `dmk` -- DMK images of the disks.  These can be used for writing to physical disks or in emulators such as XRoar or David Keil's CoCo 2 emulator.
 * `sdf` -- SDF images for CoCo SDC
+* `ima` -- IMA images for SWTPCemu
 
 ## Building Requirements
 
 Both tools must be in the current PATH
 
-* `hxcfe` -- HxCFloppyEmulator command line tool - NOTE: Must be Version 2.14.6.3 or later
+* `hxcfe` -- HxCFloppyEmulator command line tool - NOTE: Must be Version 2.14.6.4 or later
 * `dmk2sdf` -- DMK to SDF conversion utility
 
 ## Building
@@ -41,7 +52,7 @@ Both tools must be in the current PATH
 
 ## History
 
-The FLEX operating system was originally released in May 1978 for MC6800 based systems.  The MC6809 CPU was released in 1978 but systems contining the new CPU weren't widely available until SWTPC and GIMIX and the TRS-80 Color Computer were all released in 1980.  Microware's OS-9 also came about around 1980.  This means that FLEX pre-dates OS-9 by 2-3 years.  Ultimately FLEX started to slowly die off after the release of the IBM-PC in 1981.  Despite this OS-9 survived and continued on into the late 1990's.
+The FLEX operating system was originally released in May 1978 for MC6800 based systems.  The MC6809 CPU was released in 1978 but systems contining the new CPU weren't widely available until SWTPC and GIMIX and the TRS-80 Color Computer were all released in 1980.  Microware's OS-9 also came about around 1980.  This means that FLEX pre-dates OS-9 by 2-3 years.  Ultimately FLEX started to slowly die off after the release of the Color Computer OS-9 in 1983.  Despite this OS-9 survived and continued on into the late 1990's.
 
 The Frank Hogg version of FLEX 5.0 for the Color Computer came out around March 1982.  FHL placed very aggressive ads in 68 Micro Journal and Rainbow Magazine setting up for a battle between FLEX and OS-9.
 

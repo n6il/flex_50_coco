@@ -28,8 +28,13 @@ def getSector(obj, si, ss, offset, ell=None):
 tracks = 34
 spt = 18
 sides = 1
-sectors_track_0 = (1,4,7,10,3,6,9,2,5,8)
-sectors_track = (1,11,4,14,7,17,10,3,13,6,16,9,2,12,5,15,8,18)
+interleave = True
+if interleave:
+    sectors_track_0 = (1,4,7,10,3,6,9,2,5,8)
+    sectors_track = (1,11,4,14,7,10,3,13,6,9,2,12,5,15,8)
+else:
+    sectors_track_0 = range(1,11)
+    sectors_track = range(1,spt+1)
 sector_len = 256
 padded = False
 flex = True
@@ -108,15 +113,16 @@ for side in range(sides):
     offset += len(sectors_track_0) * sector_len
     if padded:
         # hack to skipp padding
+        padding_len = len(sectors_track) - len(sectors_track_0)
         if flex:
             # Accumulate 8 sectors which will need to be skipped
             # later - See note below
-            skip += 8 * sector_len
+            skip += padding_len * sector_len
         else:
             # Non-Flex
             # Sectors on both sides of the disk are numbered the same, 1-n
             # The padding sectors n+1, n+2, etc. appear at the end of each side
-            offset += 8 * sector_len
+            offset += padding_len * sector_len
 
 if flex:
     # For FLEX -
